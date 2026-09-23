@@ -1,0 +1,315 @@
+{
+  "users": [
+    {
+      "id": "usr_citizen_001",
+      "email": "citizen@ap.gov.in",
+      "password_hash": "70bd102cd9fbc084ba695894dfd8e4bf08737b474791e42bd8541190d57b84fe",
+      "name": "Kiran Kumar",
+      "phone": "+91 98765 43210",
+      "role": "citizen",
+      "department_id": null,
+      "created_at": "2026-09-23T10:21:47.145Z"
+    },
+    {
+      "id": "usr_officer_001",
+      "email": "officer@ap.gov.in",
+      "password_hash": "81ff7ed1ded1442696bc6a284a35364d1fc973d5239fb5fffaa37ae22470f0d7",
+      "name": "Sri R. Venkat Rao",
+      "phone": "+91 94401 23456",
+      "role": "officer",
+      "department_id": "dept_revenue",
+      "created_at": "2026-09-23T10:21:47.146Z"
+    },
+    {
+      "id": "usr_admin_001",
+      "email": "admin@ap.gov.in",
+      "password_hash": "6921cc1ec973ec8fed5082ebc2f4b65845e6648c0bda941f9a297ff92362be76",
+      "name": "State IT Nodal Administrator",
+      "phone": "+91 86624 55555",
+      "role": "admin",
+      "department_id": null,
+      "created_at": "2026-09-23T10:21:47.146Z"
+    }
+  ],
+  "citizen_profiles": [
+    {
+      "id": 1,
+      "user_id": "usr_citizen_001",
+      "name": "Kiran Kumar",
+      "email": "citizen@ap.gov.in",
+      "phone": "+91 98765 43210",
+      "aadhaar": "4532 8901 2345",
+      "dob": "1998-05-14",
+      "gender": "Male",
+      "district": "Visakhapatnam",
+      "mandal": "Gajuwaka",
+      "address": "Door No: 12-4-5/A, Srinivas Nagar, Gajuwaka, Visakhapatnam - 530026",
+      "avatar": "/citizen_avatar.png",
+      "annual_income": 120000,
+      "caste_category": "BC",
+      "occupation": "Lead Enterprise Architect",
+      "qualification": "B.Tech",
+      "updated_at": "2026-09-23T10:24:26.664Z"
+    }
+  ],
+  "departments": [
+    {
+      "id": "dept_revenue",
+      "code": "REV",
+      "name": "Revenue & Disaster Management",
+      "icon": "fa-landmark",
+      "description": "Land records, caste certificates, income certificates, encumbrance and title deeds.",
+      "service_count": 42,
+      "grievance_sla_days": 5
+    },
+    {
+      "id": "dept_education",
+      "code": "EDU",
+      "name": "School & Higher Education",
+      "icon": "fa-graduation-cap",
+      "description": "Fee reimbursement, scholarship schemes, admission entitlements, and student welfare.",
+      "service_count": 28,
+      "grievance_sla_days": 7
+    },
+    {
+      "id": "dept_health",
+      "code": "HLT",
+      "name": "Health, Medical & Family Welfare",
+      "icon": "fa-heart-pulse",
+      "description": "YSR Aarogyasri cashless hospitalization, health cards, public clinic dispensaries.",
+      "service_count": 35,
+      "grievance_sla_days": 3
+    },
+    {
+      "id": "dept_municipal",
+      "code": "MAUD",
+      "name": "Municipal Administration & Urban Dev",
+      "icon": "fa-city",
+      "description": "Water supply, sanitation, property tax, trade licenses, and urban town planning.",
+      "service_count": 54,
+      "grievance_sla_days": 7
+    },
+    {
+      "id": "dept_agriculture",
+      "code": "AGR",
+      "name": "Agriculture & Farmers Welfare",
+      "icon": "fa-seedling",
+      "description": "Rythu Bharosa inputs, crop insurance e-Crop booking, farm mechanization subsidies.",
+      "service_count": 31,
+      "grievance_sla_days": 10
+    },
+    {
+      "id": "dept_transport",
+      "code": "TRN",
+      "name": "Transport Department",
+      "icon": "fa-car",
+      "description": "Driving licenses, vehicle registration, road tax payment, permit renewals.",
+      "service_count": 24,
+      "grievance_sla_days": 7
+    },
+    {
+      "id": "dept_housing",
+      "code": "HSG",
+      "name": "Housing Department",
+      "icon": "fa-house-chimney",
+      "description": "Navaratnalu Pedalandariki Illu housing allotments, construction subsidy disbursements.",
+      "service_count": 18,
+      "grievance_sla_days": 14
+    },
+    {
+      "id": "dept_social",
+      "code": "SOC",
+      "name": "Social & Tribal Welfare",
+      "icon": "fa-hand-holding-heart",
+      "description": "Special assistance schemes, post-matric hostel admissions, skill development.",
+      "service_count": 22,
+      "grievance_sla_days": 7
+    }
+  ],
+  "schemes": [
+    {
+      "id": "SCH-001",
+      "code": "JVD-2026",
+      "title": "Jagananna Vidya Deevena (Fee Reimbursement)",
+      "department_id": "dept_education",
+      "department_name": "School & Higher Education",
+      "category": "Higher Education",
+      "eligibility_criteria": {
+        "max_annual_income": 250000,
+        "caste_categories": [
+          "OC",
+          "BC",
+          "SC",
+          "ST",
+          "Minority"
+        ],
+        "min_age": 17,
+        "max_age": 28
+      },
+      "benefits": "100% tuition fee reimbursement directly credited to mother's bank account every quarter.",
+      "deadline": "30 Nov 2026",
+      "status": "Active",
+      "icon": "fa-graduation-cap",
+      "required_docs": [
+        "Aadhaar Card",
+        "College Admission Allotment Letter",
+        "Income Certificate / Rice Card",
+        "Mother's Bank Passbook"
+      ]
+    },
+    {
+      "id": "SCH-002",
+      "code": "YSR-ASRI",
+      "title": "Dr. YSR Aarogyasri Universal Health Scheme",
+      "department_id": "dept_health",
+      "department_name": "Health, Medical & Family Welfare",
+      "category": "Healthcare",
+      "eligibility_criteria": {
+        "max_annual_income": 500000,
+        "caste_categories": [
+          "OC",
+          "BC",
+          "SC",
+          "ST",
+          "Minority"
+        ],
+        "min_age": 0,
+        "max_age": 100
+      },
+      "benefits": "Cashless treatment up to ₹25 Lakhs across 3,257 listed super-specialty medical procedures.",
+      "deadline": "Open All Year",
+      "status": "Active",
+      "icon": "fa-heart-pulse",
+      "required_docs": [
+        "White Ration Card / Rice Card",
+        "Aadhaar Card",
+        "Patient Photo",
+        "Doctor Referral Note"
+      ]
+    },
+    {
+      "id": "SCH-003",
+      "code": "YSR-RB",
+      "title": "YSR Rythu Bharosa - PM KISAN",
+      "department_id": "dept_agriculture",
+      "department_name": "Agriculture & Farmers Welfare",
+      "category": "Agriculture",
+      "eligibility_criteria": {
+        "max_annual_income": 400000,
+        "caste_categories": [
+          "OC",
+          "BC",
+          "SC",
+          "ST",
+          "Minority"
+        ],
+        "min_age": 18,
+        "max_age": 75
+      },
+      "benefits": "₹13,500 annual input financial support per farmer family including tenant and RoFR farmers.",
+      "deadline": "15 May 2026",
+      "status": "Active",
+      "icon": "fa-seedling",
+      "required_docs": [
+        "Pattadar Passbook / 1B",
+        "CCRC Agreement for Tenant Farmers",
+        "Aadhaar Card",
+        "Aadhaar-seeded Bank Account"
+      ]
+    },
+    {
+      "id": "SCH-004",
+      "code": "AP-REV-01",
+      "title": "Integrated Caste & Residence Certificate",
+      "department_id": "dept_revenue",
+      "department_name": "Revenue & Disaster Management",
+      "category": "Citizen Certificates",
+      "eligibility_criteria": {
+        "max_annual_income": 1000000,
+        "caste_categories": [
+          "OC",
+          "BC",
+          "SC",
+          "ST",
+          "Minority"
+        ],
+        "min_age": 5,
+        "max_age": 100
+      },
+      "benefits": "Digitally signed permanent integrated certificate delivered within 7 working days.",
+      "deadline": "Open All Year",
+      "status": "Active",
+      "icon": "fa-certificate",
+      "required_docs": [
+        "Application Form",
+        "Aadhaar Card",
+        "School Transfer Certificate / Study Certificate",
+        "Ration Card"
+      ]
+    },
+    {
+      "id": "SCH-005",
+      "code": "AP-REV-02",
+      "title": "Income & Asset Certificate",
+      "department_id": "dept_revenue",
+      "department_name": "Revenue & Disaster Management",
+      "category": "Citizen Certificates",
+      "eligibility_criteria": {
+        "max_annual_income": 1000000,
+        "caste_categories": [
+          "OC",
+          "BC",
+          "SC",
+          "ST",
+          "Minority"
+        ],
+        "min_age": 18,
+        "max_age": 100
+      },
+      "benefits": "Official income verification document valid for all state and central entitlements.",
+      "deadline": "Open All Year",
+      "status": "Active",
+      "icon": "fa-file-invoice-dollar",
+      "required_docs": [
+        "Salary Slip / IT Returns / Mandal VRO Inspection Report",
+        "Aadhaar Card",
+        "Electricity Bill"
+      ]
+    },
+    {
+      "id": "SCH-006",
+      "code": "YSR-HSG",
+      "title": "YSR Jagananna Pedalandariki Illu",
+      "department_id": "dept_housing",
+      "department_name": "Housing Department",
+      "category": "Housing",
+      "eligibility_criteria": {
+        "max_annual_income": 150000,
+        "caste_categories": [
+          "BC",
+          "SC",
+          "ST",
+          "Minority",
+          "EWS"
+        ],
+        "min_age": 21,
+        "max_age": 60
+      },
+      "benefits": "Free house site title patta + ₹1.80 Lakhs construction financial assistance + free sand and cement.",
+      "deadline": "31 Dec 2026",
+      "status": "Active",
+      "icon": "fa-house-chimney",
+      "required_docs": [
+        "Rice Card",
+        "Aadhaar of Female Head of Household",
+        "No-Own-House Affidavit",
+        "Bank Passbook"
+      ]
+    }
+  ],
+  "applications": [],
+  "grievances": [],
+  "notifications": [],
+  "documents": [],
+  "audit_logs": []
+}
