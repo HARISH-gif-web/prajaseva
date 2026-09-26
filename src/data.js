@@ -16,57 +16,83 @@ export const INITIAL_DATA = {
   categories: [
     {
       id: "certificates",
-      title: "Certificates",
-      subtitle: "Income, Caste, Residence, Birth, Death",
+      title: "Citizen Certificates",
+      subtitle: "Income, Caste, Residence, Birth, Death & Land Records",
       icon: "file-text",
+      logoClass: "logo-revenue",
       count: 14,
       targetView: "service-certificates",
       desc: "Apply for official government certificates & land records"
     },
     {
       id: "education",
-      title: "Education",
-      subtitle: "Scholarships, Fee Reimbursement, Admissions",
+      title: "Education & Scholarships",
+      subtitle: "Vidya Deevena, Vasathi Deevena, Admissions",
       icon: "graduation-cap",
+      logoClass: "logo-education",
       count: 18,
       targetView: "dept-education",
       desc: "Student assistance, fee reimbursement & academic support"
     },
     {
       id: "health",
-      title: "Health",
-      subtitle: "Health Schemes, Aarogyasri, Medical Aid",
+      title: "Health & Medical Welfare",
+      subtitle: "Dr. YSR Aarogyasri, CMRF, Cashless Hospitalization",
       icon: "heart-pulse",
-      count: 12,
-      targetView: "scheme-aarogyasri",
+      logoClass: "logo-health",
+      count: 15,
+      targetView: "dept-health",
       desc: "Comprehensive health insurance & medical expense relief"
     },
     {
       id: "agriculture",
-      title: "Agriculture",
-      subtitle: "Farmer Services, Crop Insurance, Subsidies",
+      title: "Agriculture & Farmers Welfare",
+      subtitle: "Rythu Bharosa, e-Crop Booking, Seed Subsidies",
       icon: "sprout",
+      logoClass: "logo-agriculture",
       count: 22,
-      targetView: "scheme-rythu-bharosa",
+      targetView: "dept-agriculture",
       desc: "Rythu Bharosa, seed subsidy & financial aid for farmers"
     },
     {
+      id: "municipal",
+      title: "Municipal & Civic Amenities",
+      subtitle: "Property Tax, Drinking Water Tap, Building Plans",
+      icon: "landmark",
+      logoClass: "logo-municipal",
+      count: 31,
+      targetView: "dept-municipal",
+      desc: "Civic complaints, water supply, tax payment & urban development"
+    },
+    {
       id: "transport",
-      title: "Transport",
-      subtitle: "Driving License, Vehicle Registration, RC",
+      title: "Transport & RTO Services",
+      subtitle: "Driving License, LLR Slot, RC Transfer & Tax",
       icon: "car",
+      logoClass: "logo-transport",
       count: 16,
       targetView: "dept-transport",
       desc: "RTO services, learner license, driving test slot booking"
     },
     {
       id: "housing",
-      title: "Housing",
-      subtitle: "Housing Schemes, Site Allotment, House Sanction",
+      title: "Housing & Site Allotment",
+      subtitle: "Pedalandariki Illu, House Site Pattas, Subsidies",
       icon: "home",
-      count: 9,
+      logoClass: "logo-housing",
+      count: 12,
       targetView: "dept-housing",
       desc: "Navaratnalu Pedalandarikki Illu housing assistance"
+    },
+    {
+      id: "revenue",
+      title: "Revenue & Land Records",
+      subtitle: "Webland 1B, Adangal, Mutation & Title Deeds",
+      icon: "map",
+      logoClass: "logo-revenue",
+      count: 24,
+      targetView: "dept-revenue",
+      desc: "Digital land records mutation and revenue administration"
     }
   ],
 

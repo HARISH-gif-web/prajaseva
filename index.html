@@ -17,7 +17,9 @@
     <header class="header-main">
       <div class="header-container">
         <div class="brand-section" onclick="navigateTo('home')">
-          <div class="emblem-icon-box">🏛️</div>
+          <div class="emblem-box">
+            <img src="/ap_emblem.png" alt="Government of Andhra Pradesh Official Emblem" class="emblem-img" />
+          </div>
           <div class="brand-text">
             <h1 id="brand-title">Prajaseva</h1>
             <p id="brand-tagline">People • Government • Together</p>
@@ -36,13 +38,7 @@
         </nav>
 
         <div class="header-actions">
-          <!-- Backend Connection Badge (Python / Node.js) -->
-          <div id="backend-status-indicator" class="backend-badge" title="Active Backend Server">
-            <span class="backend-pulse-dot"></span>
-            <span id="backend-status-text">Detecting Backend...</span>
-          </div>
-
-          <!-- Dynamic Auth Container: Login button or Citizen Profile -->
+          <!-- Dynamic Auth Container: Citizen Profile with Data, Name & Email -->
           <div id="header-auth-container"></div>
 
           <button class="btn-lang-dropdown" id="lang-toggle-btn" onclick="toggleLanguage()">
@@ -51,12 +47,69 @@
             <i data-feather="chevron-down" data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
           </button>
           
-          <button class="btn-hamburger" onclick="navigateTo('profile')" title="User Profile & Menu">
-            <i data-feather="menu" data-lucide="menu"></i>
+          <!-- 3 Horizontal Lines Menu Button in Last Corner -->
+          <button class="btn-hamburger" id="quick-menu-toggle" onclick="toggleQuickMenu()" title="Quick Navigation & Features Menu" aria-label="Menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
           </button>
         </div>
       </div>
     </header>
+
+    <!-- Quick Navigation & Features Menu Drawer (3 Horizontal Lines Menu) -->
+    <div class="quick-menu-overlay" id="quick-menu-overlay" onclick="closeQuickMenu()"></div>
+    <aside class="quick-menu-drawer" id="quick-menu-drawer">
+      <div class="drawer-header">
+        <div class="drawer-brand">
+          <img src="/ap_emblem.png" alt="AP Emblem" style="height: 38px; width: 38px; object-fit: contain;" />
+          <div>
+            <h4 style="margin: 0; font-size: 1rem; color: var(--primary-navy); font-weight: 700;">PrajaSeva Portal</h4>
+            <small style="color: var(--text-muted); font-size: 0.72rem;">Government of Andhra Pradesh</small>
+          </div>
+        </div>
+        <button class="drawer-close-btn" onclick="closeQuickMenu()" title="Close Menu">✕</button>
+      </div>
+
+      <!-- Citizen Profile / Account Snapshot -->
+      <div class="drawer-account-box" id="drawer-account-info"></div>
+
+      <!-- Features Menu List -->
+      <div class="drawer-menu-list">
+        <div class="drawer-menu-item" onclick="quickNav('home')">
+          <i data-feather="home" data-lucide="home"></i> Home Page
+        </div>
+        <div class="drawer-menu-item" onclick="quickNav('services')">
+          <i data-feather="grid" data-lucide="grid"></i> All Services Directory
+        </div>
+        <div class="drawer-menu-item" onclick="quickNav('schemes')">
+          <i data-feather="award" data-lucide="award"></i> Government Welfare Schemes
+        </div>
+        <div class="drawer-menu-item" onclick="quickNav('departments')">
+          <i data-feather="landmark" data-lucide="landmark"></i> Departments Directory
+        </div>
+        <div class="drawer-menu-item" onclick="quickNav('track-application')">
+          <i data-feather="search" data-lucide="search"></i> Track Application
+        </div>
+        <div class="drawer-menu-item" onclick="quickNav('raise-grievance')">
+          <i data-feather="message-circle" data-lucide="message-circle"></i> Spandana Grievances
+        </div>
+        <div class="drawer-menu-item" onclick="openModal('eligibility-modal'); closeQuickMenu();">
+          <i data-feather="check-square" data-lucide="check-square"></i> Check Eligibility Calculator
+        </div>
+        <div class="drawer-menu-item" onclick="openModal('guidelines-modal'); closeQuickMenu();">
+          <i data-feather="book-open" data-lucide="book-open"></i> Citizen Guidelines & FAQs
+        </div>
+        <div class="drawer-menu-item" onclick="quickNav('profile')">
+          <i data-feather="user" data-lucide="user"></i> My Citizen Profile
+        </div>
+        <div class="drawer-menu-item" onclick="toggleLanguage();">
+          <i data-feather="globe" data-lucide="globe"></i> Switch Language (English / తెలుగు)
+        </div>
+      </div>
+
+      <div class="drawer-footer" id="drawer-auth-footer"></div>
+    </aside>
 
     <!-- ==================== SCREEN 1: HOME PAGE ==================== -->
     <main class="main-view" id="view-home">
@@ -170,7 +223,7 @@
 
       <div class="category-grid">
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon"><i data-feather="file-text"></i></div>
+          <div class="category-card-icon service-logo-box logo-revenue"><i data-feather="file-text" data-lucide="file-text"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Integrated Income Certificate</div>
             <div class="category-card-subtitle">Annual family income certificate for scholarship & Meeseva</div>
@@ -180,7 +233,7 @@
         </div>
 
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon" style="background:#dcfce7; color:#15803d;"><i data-feather="shield"></i></div>
+          <div class="category-card-icon service-logo-box logo-education"><i data-feather="shield" data-lucide="shield"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Integrated Caste Certificate</div>
             <div class="category-card-subtitle">Community & Caste certificate (SC/ST/BC/EBC/Kapu)</div>
@@ -190,7 +243,7 @@
         </div>
 
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon" style="background:#ffedd5; color:#c2410c;"><i data-feather="map-pin"></i></div>
+          <div class="category-card-icon service-logo-box logo-transport"><i data-feather="map-pin" data-lucide="map-pin"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Residence & Nativity Certificate</div>
             <div class="category-card-subtitle">Proof of local residence in Andhra Pradesh</div>
@@ -200,11 +253,31 @@
         </div>
 
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon" style="background:#f3e8ff; color:#7e22ce;"><i data-feather="smile"></i></div>
+          <div class="category-card-icon service-logo-box logo-health"><i data-feather="heart" data-lucide="heart"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Birth Certificate</div>
             <div class="category-card-subtitle">Official registration & digital birth certificate issuance</div>
             <span class="badge badge-info">Municipal Admin</span>
+          </div>
+          <div class="category-card-arrow">›</div>
+        </div>
+
+        <div class="category-card" onclick="navigateTo('apply-scheme')">
+          <div class="category-card-icon service-logo-box logo-agriculture"><i data-feather="map" data-lucide="map"></i></div>
+          <div class="category-card-content">
+            <div class="category-card-title">Webland 1B & Adangal Extract</div>
+            <div class="category-card-subtitle">Official digital land records and mutation verification</div>
+            <span class="badge badge-success">Revenue Webland</span>
+          </div>
+          <div class="category-card-arrow">›</div>
+        </div>
+
+        <div class="category-card" onclick="navigateTo('apply-scheme')">
+          <div class="category-card-icon service-logo-box logo-municipal"><i data-feather="droplet" data-lucide="droplet"></i></div>
+          <div class="category-card-content">
+            <div class="category-card-title">Municipal Water & Tap Connection</div>
+            <div class="category-card-subtitle">Civic pipeline approval & meter certificate</div>
+            <span class="badge badge-warning">MA&UD Dept</span>
           </div>
           <div class="category-card-arrow">›</div>
         </div>
@@ -398,7 +471,7 @@
       </div>
       <div class="category-grid">
         <div class="category-card" onclick="navigateTo('service-certificates')">
-          <div class="category-card-icon"><i data-feather="file-text" data-lucide="file-text"></i></div>
+          <div class="category-card-icon service-logo-box logo-revenue"><i data-feather="file-text" data-lucide="file-text"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Integrated Caste & Income Certificates</div>
             <div class="category-card-subtitle">Official certificates issued under Meeseva & Ward Secretariat</div>
@@ -407,7 +480,7 @@
           <div class="category-card-arrow">›</div>
         </div>
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon" style="background:#e0f2fe; color:#0284c7;"><i data-feather="map" data-lucide="map"></i></div>
+          <div class="category-card-icon service-logo-box logo-agriculture"><i data-feather="map" data-lucide="map"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Webland 1B & Adangal Extract</div>
             <div class="category-card-subtitle">Digital land records mutation and title ownership verification</div>
@@ -416,7 +489,7 @@
           <div class="category-card-arrow">›</div>
         </div>
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon" style="background:#ffedd5; color:#c2410c;"><i data-feather="home" data-lucide="home"></i></div>
+          <div class="category-card-icon service-logo-box logo-transport"><i data-feather="home" data-lucide="home"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Residence & Nativity Certificate</div>
             <div class="category-card-subtitle">Proof of continuous residence within Andhra Pradesh mandals</div>
@@ -436,7 +509,7 @@
       </div>
       <div class="category-grid">
         <div class="category-card" onclick="navigateTo('scheme-fee-reimbursement')">
-          <div class="category-card-icon"><i data-feather="book-open" data-lucide="graduation-cap"></i></div>
+          <div class="category-card-icon service-logo-box logo-education"><i data-feather="book-open" data-lucide="graduation-cap"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Jagananna Vidya Deevena (Fee Reimbursement)</div>
             <div class="category-card-subtitle">100% Tuition fee support for technical and collegiate students</div>
@@ -445,7 +518,7 @@
           <div class="category-card-arrow">›</div>
         </div>
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon" style="background:#e0f2fe; color:#0284c7;"><i data-feather="award" data-lucide="award"></i></div>
+          <div class="category-card-icon service-logo-box logo-education"><i data-feather="award" data-lucide="award"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Jagananna Vasathi Deevena</div>
             <div class="category-card-subtitle">Hostel and accommodation allowance of ₹20,000 per year</div>
@@ -465,7 +538,7 @@
       </div>
       <div class="category-grid">
         <div class="category-card" onclick="navigateTo('scheme-aarogyasri')">
-          <div class="category-card-icon" style="background:#dcfce7; color:#15803d;"><i data-feather="activity" data-lucide="heart-pulse"></i></div>
+          <div class="category-card-icon service-logo-box logo-health"><i data-feather="activity" data-lucide="heart-pulse"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">YSR Aarogyasri Health Scheme</div>
             <div class="category-card-subtitle">Free healthcare access across all empaneled hospitals</div>
@@ -474,7 +547,7 @@
           <div class="category-card-arrow">›</div>
         </div>
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon" style="background:#e0f2fe; color:#0284c7;"><i data-feather="file-plus" data-lucide="file-plus"></i></div>
+          <div class="category-card-icon service-logo-box logo-health"><i data-feather="file-plus" data-lucide="file-plus"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Chief Minister Relief Fund (CMRF) Medical Claim</div>
             <div class="category-card-subtitle">Financial grant for critical treatments not covered in standard lists</div>
@@ -494,7 +567,7 @@
       </div>
       <div class="category-grid">
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon"><i data-feather="home" data-lucide="landmark"></i></div>
+          <div class="category-card-icon service-logo-box logo-municipal"><i data-feather="home" data-lucide="landmark"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Property Tax Assessment & Pay Online</div>
             <div class="category-card-subtitle">Instant tax assessment, door-to-door verification & receipts</div>
@@ -503,7 +576,7 @@
           <div class="category-card-arrow">›</div>
         </div>
         <div class="category-card" onclick="navigateTo('raise-grievance')">
-          <div class="category-card-icon" style="background:#ffedd5; color:#c2410c;"><i data-feather="tool" data-lucide="wrench"></i></div>
+          <div class="category-card-icon service-logo-box logo-municipal"><i data-feather="tool" data-lucide="wrench"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Civic Complaints & Water Supply Grievance</div>
             <div class="category-card-subtitle">Lodge complaints regarding municipal pipeline leaks or sanitation</div>
@@ -523,7 +596,7 @@
       </div>
       <div class="category-grid">
         <div class="category-card" onclick="navigateTo('scheme-rythu-bharosa')">
-          <div class="category-card-icon" style="background:#dcfce7; color:#15803d;"><i data-feather="sun" data-lucide="sprout"></i></div>
+          <div class="category-card-icon service-logo-box logo-agriculture"><i data-feather="sun" data-lucide="sprout"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">YSR Rythu Bharosa - PM Kisan</div>
             <div class="category-card-subtitle">₹13,500 annual incentive deposited directly to bank accounts</div>
@@ -532,7 +605,7 @@
           <div class="category-card-arrow">›</div>
         </div>
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon" style="background:#e0f2fe; color:#0284c7;"><i data-feather="check-circle" data-lucide="check-circle"></i></div>
+          <div class="category-card-icon service-logo-box logo-agriculture"><i data-feather="check-circle" data-lucide="check-circle"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Free e-Crop Insurance Verification</div>
             <div class="category-card-subtitle">Verify village secretariat e-crop bookings for 100% natural calamity cover</div>
@@ -552,7 +625,7 @@
       </div>
       <div class="category-grid">
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon"><i data-feather="truck" data-lucide="car"></i></div>
+          <div class="category-card-icon service-logo-box logo-transport"><i data-feather="truck" data-lucide="car"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Learner's License (LLR) Slot Booking</div>
             <div class="category-card-subtitle">Book online driving knowledge test slot at your nearest RTO / Meeseva</div>
@@ -561,7 +634,7 @@
           <div class="category-card-arrow">›</div>
         </div>
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon" style="background:#f3e8ff; color:#7e22ce;"><i data-feather="file-text" data-lucide="file-text"></i></div>
+          <div class="category-card-icon service-logo-box logo-transport"><i data-feather="file-text" data-lucide="file-text"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">Driving License Renewal & Address Change</div>
             <div class="category-card-subtitle">Paperless renewal of valid motor vehicle driving licenses</div>
@@ -581,7 +654,7 @@
       </div>
       <div class="category-grid">
         <div class="category-card" onclick="navigateTo('apply-scheme')">
-          <div class="category-card-icon"><i data-feather="home" data-lucide="home"></i></div>
+          <div class="category-card-icon service-logo-box logo-housing"><i data-feather="home" data-lucide="home"></i></div>
           <div class="category-card-content">
             <div class="category-card-title">YSR Jagananna Housing Colonies Allotment</div>
             <div class="category-card-subtitle">Check house sanction status and patta registration records</div>

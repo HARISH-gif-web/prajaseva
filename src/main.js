@@ -52,18 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function initBackendConnection() {
-  const backend = await api.detectBackend();
-  const indicator = document.getElementById('backend-status-text');
-  const dot = document.querySelector('.backend-pulse-dot');
-  if (indicator) {
-    if (backend && backend.url) {
-      indicator.innerHTML = `<span style="color:var(--primary-navy); font-weight:700;">${backend.name}</span>`;
-      if (dot) dot.style.backgroundColor = '#16a34a';
-    } else {
-      indicator.innerText = 'Offline (Local Storage)';
-      if (dot) dot.style.backgroundColor = '#eab308';
-    }
-  }
+  await api.detectBackend();
 
   // Sync profile from backend if available
   try {
@@ -95,17 +84,23 @@ async function initBackendConnection() {
   } catch (e) {}
 }
 
-// Render Dynamic Header Auth Section
+// Render Dynamic Header Auth Section (Citizen Logo + Data + Name & Email)
 function renderHeaderAuth() {
   const container = document.getElementById('header-auth-container');
   if (!container) return;
 
   if (store.isLoggedIn) {
-    const displayName = store.profile.name || "My Account";
+    const name = store.profile?.name || store.currentUser?.name || "Citizen Account";
+    const email = store.profile?.email || store.currentUser?.email || "citizen@ap.gov.in";
+    const avatar = store.profile?.avatar || "/citizen_avatar.png";
+
     container.innerHTML = `
-      <div class="user-profile-btn" onclick="navigateTo('profile')" title="View Citizen Profile">
-        <img src="${store.profile.avatar || '/citizen_avatar.png'}" alt="Avatar" class="avatar-sm" />
-        <span style="font-size: 0.85rem; font-weight: 700; color: var(--primary-navy);">${displayName}</span>
+      <div class="citizen-badge-chip" onclick="navigateTo('profile')" title="Logged in as ${name} (${email})">
+        <img src="${avatar}" alt="Citizen Avatar" class="citizen-chip-avatar" />
+        <div class="citizen-chip-meta">
+          <span class="citizen-chip-name">${name}</span>
+          <span class="citizen-chip-email">${email}</span>
+        </div>
       </div>
     `;
   } else {
@@ -116,8 +111,89 @@ function renderHeaderAuth() {
     `;
   }
 
+  renderQuickMenu();
   window.refreshIcons();
 }
+
+// 3 Horizontal Lines Quick Menu Drawer Handlers
+window.toggleQuickMenu = function() {
+  const drawer = document.getElementById('quick-menu-drawer');
+  const overlay = document.getElementById('quick-menu-overlay');
+  if (drawer && overlay) {
+    const isOpen = drawer.classList.contains('active');
+    if (isOpen) {
+      window.closeQuickMenu();
+    } else {
+      window.renderQuickMenu();
+      drawer.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+};
+
+window.closeQuickMenu = function() {
+  const drawer = document.getElementById('quick-menu-drawer');
+  const overlay = document.getElementById('quick-menu-overlay');
+  if (drawer) drawer.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
+  document.body.style.overflow = '';
+};
+
+window.quickNav = function(viewId) {
+  window.closeQuickMenu();
+  window.navigateTo(viewId);
+};
+
+window.renderQuickMenu = function() {
+  const accountBox = document.getElementById('drawer-account-info');
+  const footerBox = document.getElementById('drawer-auth-footer');
+  if (!accountBox || !footerBox) return;
+
+  if (store.isLoggedIn) {
+    const name = store.profile?.name || store.currentUser?.name || "Citizen Account";
+    const email = store.profile?.email || store.currentUser?.email || "citizen@ap.gov.in";
+    const district = store.profile?.district || "Andhra Pradesh";
+    const avatar = store.profile?.avatar || "/citizen_avatar.png";
+
+    accountBox.innerHTML = `
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <img src="${avatar}" alt="Avatar" style="width:44px; height:44px; border-radius:50%; border:2px solid #0284c7; background:#fff; object-fit:cover;" />
+        <div style="flex:1; overflow:hidden;">
+          <div style="font-weight:700; color:var(--primary-navy); font-size:0.95rem; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">${name}</div>
+          <div style="font-size:0.75rem; color:#0369a1; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">${email}</div>
+          <span class="badge badge-success" style="font-size:0.7rem; padding:0.15rem 0.5rem; margin-top:0.25rem;">${district}</span>
+        </div>
+      </div>
+    `;
+
+    footerBox.innerHTML = `
+      <button class="btn-primary" style="width:100%; justify-content:center; background:#dc2626; color:white; border:none; padding:0.75rem;" onclick="performLogout(); closeQuickMenu();">
+        <i data-feather="log-out" data-lucide="log-out"></i> Logout from Portal
+      </button>
+    `;
+  } else {
+    accountBox.innerHTML = `
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <div style="width:40px; height:40px; border-radius:50%; background:#e2e8f0; display:flex; align-items:center; justify-content:center; color:var(--primary-navy); font-size:1.2rem;">
+          👤
+        </div>
+        <div>
+          <div style="font-weight:700; color:var(--primary-navy); font-size:0.9rem;">Citizen Guest</div>
+          <small style="color:var(--text-muted); font-size:0.75rem;">Sign in to access personalized services</small>
+        </div>
+      </div>
+    `;
+
+    footerBox.innerHTML = `
+      <button class="btn-primary" style="width:100%; justify-content:center; padding:0.75rem;" onclick="closeQuickMenu(); openModal('login-modal');">
+        <i data-feather="log-in" data-lucide="log-in"></i> Citizen Login / Register
+      </button>
+    `;
+  }
+
+  window.refreshIcons();
+};
 
 // Router Engine
 window.navigateTo = function(viewId) {
@@ -171,15 +247,36 @@ window.navigateTo = function(viewId) {
 
 // Citizen Login / Logout Handlers
 window.performCitizenLogin = async function() {
-  const cred = document.getElementById('login-credential')?.value.trim() || '9876543210';
-  const pwd = document.getElementById('login-password')?.value.trim() || '123456';
+  const credInput = document.getElementById('login-credential');
+  const pwdInput = document.getElementById('login-password');
+  const cred = credInput?.value.trim();
+  const pwd = pwdInput?.value.trim();
 
-  const res = await api.login(cred, pwd);
+  if (!cred) {
+    alert('Please enter your Registered Mobile, Email, or Aadhaar number.');
+    if (credInput) credInput.focus();
+    return;
+  }
+
+  const res = await api.login(cred, pwd || 'Citizen@123');
   store.isLoggedIn = true;
   localStorage.setItem('prajaseva_logged_in', 'true');
   
-  if (res && res.profile && res.profile.name) {
-    store.profile = { ...store.profile, ...res.profile };
+  if (res) {
+    if (res.user) {
+      store.currentUser = res.user;
+      localStorage.setItem('prajaseva_user', JSON.stringify(res.user));
+    }
+    if (res.profile && res.profile.name) {
+      store.profile = { ...store.profile, ...res.profile };
+    } else if (res.user && res.user.name) {
+      store.profile = {
+        ...store.profile,
+        name: res.user.name,
+        email: res.user.email,
+        phone: res.user.phone || (cred.length === 10 ? cred : store.profile.phone)
+      };
+    }
     localStorage.setItem('prajaseva_profile', JSON.stringify(store.profile));
   }
   
@@ -191,6 +288,8 @@ window.performCitizenLogin = async function() {
 window.performLogout = function() {
   store.isLoggedIn = false;
   localStorage.removeItem('prajaseva_logged_in');
+  localStorage.removeItem('prajaseva_jwt');
+  localStorage.removeItem('prajaseva_user');
   renderHeaderAuth();
   navigateTo('home');
 };
@@ -422,7 +521,9 @@ function renderServicesGrid() {
 
   grid.innerHTML = INITIAL_DATA.categories.map(cat => `
     <div class="category-card" onclick="navigateTo('${cat.targetView}')">
-      <div class="category-card-icon"><i data-feather="${cat.icon}" data-lucide="${cat.icon}"></i></div>
+      <div class="category-card-icon service-logo-box ${cat.logoClass || 'logo-revenue'}">
+        <i data-feather="${cat.icon}" data-lucide="${cat.icon}"></i>
+      </div>
       <div class="category-card-content">
         <div class="category-card-title">${cat.title}</div>
         <div class="category-card-subtitle">${cat.subtitle}</div>
@@ -438,9 +539,19 @@ function renderDepartmentsGrid() {
   const grid = document.getElementById('departments-grid');
   if (!grid) return;
 
+  const deptLogoClasses = {
+    'revenue': 'logo-revenue',
+    'education-dept': 'logo-education',
+    'health-dept': 'logo-health',
+    'municipal': 'logo-municipal',
+    'agri-dept': 'logo-agriculture',
+    'transport-dept': 'logo-transport',
+    'housing-dept': 'logo-housing'
+  };
+
   grid.innerHTML = INITIAL_DATA.departments.map(dept => `
     <div class="category-card" onclick="navigateTo('${dept.targetView}')">
-      <div class="category-card-icon" style="background:#e0f2fe; color:var(--primary-navy);">
+      <div class="category-card-icon service-logo-box ${deptLogoClasses[dept.id] || 'logo-revenue'}">
         <i data-feather="${dept.icon}" data-lucide="${dept.icon}"></i>
       </div>
       <div class="category-card-content">
@@ -458,9 +569,15 @@ function renderSchemesCatalog() {
   const grid = document.getElementById('schemes-catalog-grid');
   if (!grid) return;
 
+  const schemeLogos = {
+    'fee-reimbursement': 'logo-education',
+    'aarogyasri': 'logo-health',
+    'rythu-bharosa': 'logo-agriculture'
+  };
+
   grid.innerHTML = INITIAL_DATA.schemesList.map(scheme => `
     <div class="category-card" onclick="navigateTo('${scheme.targetView}')">
-      <div class="category-card-icon" style="background:#e0f2fe; color:var(--primary-navy);">
+      <div class="category-card-icon service-logo-box ${schemeLogos[scheme.id] || 'logo-education'}">
         <i data-feather="${scheme.icon}" data-lucide="${scheme.icon}"></i>
       </div>
       <div class="category-card-content">

@@ -126,17 +126,26 @@ export const api = {
     }
 
     // Fallback local response
+    const existingProfile = JSON.parse(localStorage.getItem('prajaseva_profile')) || {};
+    const enteredEmail = credential.includes('@') ? credential : (existingProfile.email || 'citizen@ap.gov.in');
+    const enteredPhone = credential.length === 10 ? credential : (existingProfile.phone || '');
+    const enteredAadhaar = credential.length === 12 ? credential : (existingProfile.aadhaar || '');
+    const citizenName = existingProfile.name || (credential.includes('@') ? credential.split('@')[0] : 'Citizen User');
+
     return {
       success: true,
       token: 'local_token_' + Date.now(),
-      message: 'Citizen authenticated locally.',
-      user: { email: 'citizen@ap.gov.in', role: 'citizen', name: 'Kiran Kumar' },
-      profile: JSON.parse(localStorage.getItem('prajaseva_profile')) || {
-        name: "Kiran Kumar",
-        phone: credential.length === 10 ? credential : "+91 98765 43210",
-        aadhaar: credential.length === 12 ? credential : "4532 8901 2345",
-        email: "citizen@ap.gov.in",
-        avatar: "/citizen_avatar.png"
+      message: 'Citizen authenticated successfully.',
+      user: { email: enteredEmail, role: 'citizen', name: citizenName },
+      profile: {
+        name: citizenName,
+        phone: enteredPhone,
+        aadhaar: enteredAadhaar,
+        email: enteredEmail,
+        district: existingProfile.district || "Andhra Pradesh",
+        mandal: existingProfile.mandal || "",
+        address: existingProfile.address || "",
+        avatar: existingProfile.avatar || "/citizen_avatar.png"
       }
     };
   },
@@ -165,15 +174,15 @@ export const api = {
       return remote;
     }
     return JSON.parse(localStorage.getItem('prajaseva_profile')) || {
-      name: "Kiran Kumar",
-      email: "citizen@ap.gov.in",
-      phone: "+91 98765 43210",
-      aadhaar: "4532 8901 2345",
-      dob: "1998-05-14",
+      name: "",
+      email: "",
+      phone: "",
+      aadhaar: "",
+      dob: "",
       gender: "Male",
-      district: "Visakhapatnam",
-      mandal: "Gajuwaka",
-      address: "Door No: 12-4-5/A, Srinivas Nagar, Gajuwaka, Visakhapatnam - 530026",
+      district: "",
+      mandal: "",
+      address: "",
       avatar: "/citizen_avatar.png"
     };
   },
@@ -257,7 +266,7 @@ export const api = {
     const localApp = {
       id: newId,
       scheme: applicationData.scheme || "Jagananna Vidya Deevena",
-      applicantName: applicationData.applicantName || "Kiran Kumar",
+      applicantName: applicationData.applicantName || applicationData.name || "Citizen Applicant",
       submissionDate: nowStr,
       status: "Under Scrutiny",
       statusCode: "submitted",

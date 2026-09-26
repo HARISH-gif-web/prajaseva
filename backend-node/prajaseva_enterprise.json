@@ -49,7 +49,7 @@
       "caste_category": "BC",
       "occupation": "Lead Enterprise Architect",
       "qualification": "B.Tech",
-      "updated_at": "2026-09-23T10:24:26.664Z"
+      "updated_at": "2026-09-26T06:03:56.444Z"
     }
   ],
   "departments": [
@@ -307,9 +307,228 @@
       ]
     }
   ],
-  "applications": [],
-  "grievances": [],
-  "notifications": [],
+  "applications": [
+    {
+      "id": "TEST-636449",
+      "scheme_id": "SCH-001",
+      "scheme": "Jagananna Vidya Deevena (Fee Reimbursement)",
+      "user_id": "usr_citizen_001",
+      "applicantName": "Kiran Kumar Test",
+      "applicant_name": "Kiran Kumar Test",
+      "aadhaar": "4532 8901 2345",
+      "mobile": "+91 98765 43210",
+      "email": "citizen@ap.gov.in",
+      "college": "Andhra University",
+      "course": "M.Tech AI",
+      "income": "₹1,20,000",
+      "district": "Visakhapatnam",
+      "mandal": "Gajuwaka",
+      "submissionDate": "26 Sept 2026, 11:33 AM",
+      "submission_date": "26 Sept 2026, 11:33 AM",
+      "status": "Approved by Mandal Revenue Officer",
+      "statusCode": "approved",
+      "status_code": "approved",
+      "stepIndex": 4,
+      "step_index": 4,
+      "department": "Higher Education Department",
+      "officerRemarks": "All digital documents verified with Andhra University registrar. Sanctioned.",
+      "officer_remarks": "All digital documents verified with Andhra University registrar. Sanctioned.",
+      "assignedOfficer": "Sri R. Venkat Rao, Tahsildar / Mandal Revenue Officer",
+      "assigned_officer": "Sri R. Venkat Rao, Tahsildar / Mandal Revenue Officer",
+      "timeline": [
+        {
+          "step": "Online Application Submitted",
+          "status": "completed",
+          "remarks": "Documents uploaded and digitally signed via Aadhaar OTP",
+          "date": "26 Sept 2026, 11:33 AM"
+        },
+        {
+          "step": "Secretariat Verification",
+          "status": "active",
+          "remarks": "Assigned to Ward Education Secretary for field verification",
+          "date": "Pending"
+        },
+        {
+          "step": "Mandal Revenue Officer Approval",
+          "status": "pending",
+          "remarks": "MRO digital signature required",
+          "date": "Pending"
+        },
+        {
+          "step": "Sanction Order & Direct Benefit Transfer",
+          "status": "completed",
+          "remarks": "All digital documents verified with Andhra University registrar. Sanctioned.",
+          "date": "26 Sept 2026, 11:33 AM"
+        }
+      ],
+      "created_at": "2026-09-26T06:03:56.450Z",
+      "updated_at": "2026-09-26T06:03:56.453Z"
+    },
+    {
+      "id": "TEST-113270",
+      "scheme_id": "SCH-001",
+      "scheme": "Jagananna Vidya Deevena (Fee Reimbursement)",
+      "user_id": "usr_citizen_001",
+      "applicantName": "Kiran Kumar Test",
+      "applicant_name": "Kiran Kumar Test",
+      "aadhaar": "4532 8901 2345",
+      "mobile": "+91 98765 43210",
+      "email": "citizen@ap.gov.in",
+      "college": "Andhra University",
+      "course": "M.Tech AI",
+      "income": "₹1,20,000",
+      "district": "Visakhapatnam",
+      "mandal": "Gajuwaka",
+      "submissionDate": "26 Sept 2026, 11:08 AM",
+      "submission_date": "26 Sept 2026, 11:08 AM",
+      "status": "Approved by Mandal Revenue Officer",
+      "statusCode": "approved",
+      "status_code": "approved",
+      "stepIndex": 4,
+      "step_index": 4,
+      "department": "Higher Education Department",
+      "officerRemarks": "All digital documents verified with Andhra University registrar. Sanctioned.",
+      "officer_remarks": "All digital documents verified with Andhra University registrar. Sanctioned.",
+      "assignedOfficer": "Sri R. Venkat Rao, Tahsildar / Mandal Revenue Officer",
+      "assigned_officer": "Sri R. Venkat Rao, Tahsildar / Mandal Revenue Officer",
+      "timeline": [
+        {
+          "step": "Online Application Submitted",
+          "status": "completed",
+          "remarks": "Documents uploaded and digitally signed via Aadhaar OTP",
+          "date": "26 Sept 2026, 11:08 AM"
+        },
+        {
+          "step": "Secretariat Verification",
+          "status": "active",
+          "remarks": "Assigned to Ward Education Secretary for field verification",
+          "date": "Pending"
+        },
+        {
+          "step": "Mandal Revenue Officer Approval",
+          "status": "pending",
+          "remarks": "MRO digital signature required",
+          "date": "Pending"
+        },
+        {
+          "step": "Sanction Order & Direct Benefit Transfer",
+          "status": "completed",
+          "remarks": "All digital documents verified with Andhra University registrar. Sanctioned.",
+          "date": "26 Sept 2026, 11:08 AM"
+        }
+      ],
+      "created_at": "2026-09-26T05:38:33.288Z",
+      "updated_at": "2026-09-26T05:38:33.292Z"
+    }
+  ],
+  "grievances": [
+    {
+      "id": "GRV-36454",
+      "user_id": "usr_citizen_001",
+      "department_id": "dept_municipal",
+      "department": "Municipal Administration & Urban Development",
+      "subject": "Streetlight repair needed on Ward 14 Main Road",
+      "description": "Streetlights non-functional for 2 days near colony park.",
+      "location": "Gajuwaka Ward 14",
+      "district": "Visakhapatnam",
+      "urgency": "Normal",
+      "submissionDate": "26 Sept 2026, 11:33 AM",
+      "submission_date": "26 Sept 2026, 11:33 AM",
+      "status": "Resolved & Closed",
+      "statusCode": "resolved",
+      "status_code": "resolved",
+      "assignedOfficer": "Sri K. Mohan Rao, Municipal Ward Officer",
+      "assigned_officer": "Sri K. Mohan Rao, Municipal Ward Officer",
+      "resolutionRemarks": "Municipal electrical team replaced LED bulb fixtures. Verified functioning.",
+      "resolution_remarks": "Municipal electrical team replaced LED bulb fixtures. Verified functioning.",
+      "updates": [
+        {
+          "time": "26 Sept 2026, 11:33 AM",
+          "text": "Grievance #GRV-36454 acknowledged and assigned to Municipal Ward Secretariat.",
+          "author": "Spandana Cell (System Dispatcher)"
+        },
+        {
+          "time": "26 Sept 2026, 11:33 AM",
+          "text": "Municipal electrical team replaced LED bulb fixtures. Verified functioning.",
+          "author": "Ward Secretariat Nodal Officer"
+        }
+      ],
+      "created_at": "2026-09-26T06:03:56.454Z",
+      "updated_at": "2026-09-26T06:03:56.456Z"
+    },
+    {
+      "id": "GRV-13294",
+      "user_id": "usr_citizen_001",
+      "department_id": "dept_municipal",
+      "department": "Municipal Administration & Urban Development",
+      "subject": "Streetlight repair needed on Ward 14 Main Road",
+      "description": "Streetlights non-functional for 2 days near colony park.",
+      "location": "Gajuwaka Ward 14",
+      "district": "Visakhapatnam",
+      "urgency": "Normal",
+      "submissionDate": "26 Sept 2026, 11:08 AM",
+      "submission_date": "26 Sept 2026, 11:08 AM",
+      "status": "Resolved & Closed",
+      "statusCode": "resolved",
+      "status_code": "resolved",
+      "assignedOfficer": "Sri K. Mohan Rao, Municipal Ward Officer",
+      "assigned_officer": "Sri K. Mohan Rao, Municipal Ward Officer",
+      "resolutionRemarks": "Municipal electrical team replaced LED bulb fixtures. Verified functioning.",
+      "resolution_remarks": "Municipal electrical team replaced LED bulb fixtures. Verified functioning.",
+      "updates": [
+        {
+          "time": "26 Sept 2026, 11:08 AM",
+          "text": "Grievance #GRV-13294 acknowledged and assigned to Municipal Ward Secretariat.",
+          "author": "Spandana Cell (System Dispatcher)"
+        },
+        {
+          "time": "26 Sept 2026, 11:08 AM",
+          "text": "Municipal electrical team replaced LED bulb fixtures. Verified functioning.",
+          "author": "Ward Secretariat Nodal Officer"
+        }
+      ],
+      "created_at": "2026-09-26T05:38:33.294Z",
+      "updated_at": "2026-09-26T05:38:33.296Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 4,
+      "user_id": "usr_citizen_001",
+      "title": "Grievance Registered",
+      "message": "Grievance #GRV-36454 has been logged under Spandana with SLA: 7 days.",
+      "category": "grievance",
+      "is_read": 0,
+      "created_at": "2026-09-26T06:03:56.454Z"
+    },
+    {
+      "id": 3,
+      "user_id": "usr_citizen_001",
+      "title": "Application Lodged Successfully",
+      "message": "Your application #TEST-636449 for Jagananna Vidya Deevena (Fee Reimbursement) has been registered.",
+      "category": "application",
+      "is_read": 0,
+      "created_at": "2026-09-26T06:03:56.450Z"
+    },
+    {
+      "id": 2,
+      "user_id": "usr_citizen_001",
+      "title": "Grievance Registered",
+      "message": "Grievance #GRV-13294 has been logged under Spandana with SLA: 7 days.",
+      "category": "grievance",
+      "is_read": 0,
+      "created_at": "2026-09-26T05:38:33.294Z"
+    },
+    {
+      "id": 1,
+      "user_id": "usr_citizen_001",
+      "title": "Application Lodged Successfully",
+      "message": "Your application #TEST-113270 for Jagananna Vidya Deevena (Fee Reimbursement) has been registered.",
+      "category": "application",
+      "is_read": 0,
+      "created_at": "2026-09-26T05:38:33.288Z"
+    }
+  ],
   "documents": [],
   "audit_logs": []
 }
